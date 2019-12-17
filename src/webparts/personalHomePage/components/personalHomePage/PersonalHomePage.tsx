@@ -4,6 +4,7 @@ import styles from './PersonalHomePage.module.scss';
 import { Spinner, SpinnerSize } from 'office-ui-fabric-react/lib/Spinner';
 import sitePages from '../../../../datas/spo/sitePages/executer';
 import { stringIsNullOrEmpty } from '@pnp/common';
+import QueryUtil from '../../../../utils/queryUtil';
 
 /** プロパティ 型定義 */
 export interface IProps {
@@ -25,6 +26,8 @@ export interface IStates {
   processing: boolean;
   /** マイページフォルダのURL */
   myPageFolderUrl: string;
+  /** リダイレクト停止フラグ */
+  notRedirect: boolean;
   /** ユーザー向けエラーメッセージ */
   err: string;
 }
@@ -42,9 +45,12 @@ export default class PersonalHomePage extends React.Component<IProps, IStates> {
   constructor(props: IProps) {
     super(props);
 
+    const params = new QueryUtil().get().params;
+
     this.state = {
       processing: true,
       myPageFolderUrl: `${props.currentSiteUrl}/SitePages/${this.myPageFolder}`,
+      notRedirect: (params && params.redirect) ? (params.redirect === 'false')? true : false : false,
       err: ''
     };
   }
@@ -56,7 +62,7 @@ export default class PersonalHomePage extends React.Component<IProps, IStates> {
       myPageFolderUrl: folderPath,
       processing: false
     }, () => {
-        if (this.props.mode === DisplayMode.Read) {
+        if (this.props.mode === DisplayMode.Read && this.state.notRedirect === false) {
           window.location.href = `${folderPath}/${fileName}`;
         }
     });
