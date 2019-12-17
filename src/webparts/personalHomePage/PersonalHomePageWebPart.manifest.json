@@ -1,0 +1,25 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-web-part-manifest.schema.json",
+  "id": "6ffebb1a-6e2d-40ff-b326-0b64b9a8fa34",
+  "alias": "PersonalHomePageWebPart",
+  "componentType": "WebPart",
+  "version": "*",
+  "manifestVersion": 2,
+  "requiresCustomScript": false,
+  "supportedHosts": ["SharePointWebPart"],
+  "preconfiguredEntries": [{
+    "groupId": "5c03119e-3074-46fd-976b-c60198311f70",
+    "group": { "default": "Other" },
+    "title": { 
+      "default": "マイページ", 
+      "ja-jp": "マイページ", 
+      "en-us": "Personal Home Page" },
+    "description": { 
+      "default": "このWebパーツを配置したページを表示すると、ユーザーは自動的にマイページにリダイレクトされます。", 
+      "ja-jp": "このWebパーツを配置したページを表示すると、ユーザーは自動的にマイページにリダイレクトされます。", 
+      "en-us": "Auto redirect to user personal page."  },
+    "officeFabricIconFontName": "TriggerAuto",
+    "properties": {
+    }
+  }]
+}
